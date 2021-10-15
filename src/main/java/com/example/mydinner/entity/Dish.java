@@ -1,5 +1,7 @@
 package com.example.mydinner.entity;
 
+import com.example.mydinner.service.validation.StringEnumeration;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -30,13 +32,19 @@ public class Dish implements Serializable {
     @Column
     private Double price;
 
-    @NotNull
-    @NotBlank
-    @Column
-    private String cuisine;
+    public enum CuisineTypes { mexican, italian, japanese }
 
     @NotNull
     @NotBlank
+    @StringEnumeration(enumClass = CuisineTypes.class, message = "Only 'mexican', 'italian' and 'japanese' are accepted values")
+    @Column
+    private String cuisine;
+
+    public enum StatusTypes { available, disable }
+
+    @NotNull
+    @NotBlank
+    @StringEnumeration(enumClass = StatusTypes.class, message = "Only 'available' and 'disable' are accepted values")
     @Column
     private String status;
 

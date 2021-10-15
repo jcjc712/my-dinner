@@ -2,6 +2,8 @@ package com.example.mydinner.service;
 
 import com.example.mydinner.dao.CustomerRepository;
 import com.example.mydinner.entity.Customer;
+import com.example.mydinner.rest.exception.ResourceRestBadRequestException;
+import com.example.mydinner.rest.exception.ResourceRestNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,11 +36,19 @@ public class CustomerService {
 
     @Transactional
     public void save(Customer customer) {
+        if(findById(customer.getEmail()) != null) {
+            throw new ResourceRestBadRequestException("Email already exists");
+        }
+
         this.customerRepository.save(customer);
     }
 
     @Transactional
-    public void deleteById(String id) {
-        this.customerRepository.deleteById(id);
+    public void update(Customer customer) {
+        if(findById(customer.getEmail()) == null) {
+            throw new ResourceRestNotFoundException("Customer not found");
+        }
+
+        this.customerRepository.save(customer);
     }
 }

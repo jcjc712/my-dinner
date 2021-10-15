@@ -1,5 +1,6 @@
 package com.example.mydinner.dao;
 
+import com.example.mydinner.entity.Result;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,13 @@ public class SoldDishesRepository {
     private EntityManager entityManager;
 
     @Transactional
-    public List<?> findAll(Timestamp from, Timestamp to) {
+    public List<Result> findAll(Timestamp from, Timestamp to) {
         Session currentSession = entityManager.unwrap(Session.class);
 
-        Query<?> theQuery = currentSession.createQuery("SELECT new com.example.mydinner.entity.Result(SUM(od.quantity), d.cuisine) FROM OrderDetail od INNER JOIN od.order o INNER JOIN od.dish d WHERE o.orderedAt >= :from and o.orderedAt <= :to GROUP BY d.cuisine")
+        Query<Result> theQuery = currentSession.createQuery("SELECT new com.example.mydinner.entity.Result(SUM(od.quantity), d.cuisine) FROM OrderDetail od INNER JOIN od.order o INNER JOIN od.dish d WHERE o.orderedAt >= :from and o.orderedAt <= :to GROUP BY d.cuisine", Result.class)
                 .setParameter("from", from)
                 .setParameter("to", to);
+
         return theQuery.list();
     }
 }

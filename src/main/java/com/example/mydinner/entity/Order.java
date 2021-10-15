@@ -1,7 +1,16 @@
 package com.example.mydinner.entity;
 
+import com.example.mydinner.service.validation.AtLeastTwoElements;
+import com.example.mydinner.service.validation.ValidCustomer;
+import com.example.mydinner.service.validation.ValidOrderDateTime;
+
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,18 +22,25 @@ public class Order {
     @Column
     private Long id;
 
+    @Email
+    @ValidCustomer
     @Column(name="customer_email")
     private String customerEmail;
 
+    @ValidOrderDateTime
     @Column(name = "ordered_at")
-    private Timestamp orderedAt = new Timestamp(System.currentTimeMillis());
 
+    private Timestamp orderedAt = Timestamp.valueOf(ZonedDateTime.now(ZoneId.of("America/Mexico_City")).toLocalDateTime());
+
+    @Size(min=3, max=100)
     @Column
     private String address;
 
     @Column
     private Double total = 0.0;
 
+    @Valid
+    @AtLeastTwoElements
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private Set<OrderDetail> orderDetails = new HashSet<>();
 

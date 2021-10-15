@@ -36,9 +36,4 @@ public class DishService {
     public void save(Dish dish) {
         this.dishRepository.save(dish);
     }
-
-    @Transactional
-    public void deleteById(Long id) {
-        this.dishRepository.deleteById(id);
-    }
 }

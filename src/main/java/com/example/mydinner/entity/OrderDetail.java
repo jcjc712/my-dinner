@@ -1,5 +1,7 @@
 package com.example.mydinner.entity;
 
+import com.example.mydinner.service.validation.ValidDish;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -12,9 +14,6 @@ public class OrderDetail implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
-
-//    @Column(name="dish_id")
-//    private Long dishId;
 
     @Column(name="quantity")
     private Integer quantity;
@@ -35,10 +34,14 @@ public class OrderDetail implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Dish dish;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
+    @ValidDish
+    private Long dishIdentifier;
+
     public void setDish(Dish dish) {
         this.dish = dish;
         this.price = dish.getPrice();
-
         if(this.quantity != null) {
             this.subtotal = (double) this.quantity * this.price;
         }
@@ -65,13 +68,13 @@ public class OrderDetail implements Serializable {
         this.id = id;
     }
 
-//    public Long getDishId() {
-//        return dishId;
-//    }
-//
-//    public void setDishId(Long dishId) {
-//        this.dishId = dishId;
-//    }
+    public Long getDishIdentifier() {
+        return dishIdentifier;
+    }
+
+    public void setDishIdentifier(Long dishIdentifier) {
+        this.dishIdentifier = dishIdentifier;
+    }
 
     public Integer getQuantity() {
         return quantity;

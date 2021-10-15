@@ -15,4 +15,13 @@ public class CustomerRestExceptionHandler {
         error.setTimeStamp(System.currentTimeMillis());
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(ResourceRestBadRequestException.class)
+    public ResponseEntity<CustomerRestErrorResponse> handleBadRequestException(ResourceRestBadRequestException exception) {
+        CustomerRestErrorResponse error = new CustomerRestErrorResponse();
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.setMessage(exception.getMessage());
+        error.setTimeStamp(System.currentTimeMillis());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 }
