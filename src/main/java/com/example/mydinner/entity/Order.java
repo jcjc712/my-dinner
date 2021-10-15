@@ -55,6 +55,11 @@ public class Order {
         this.total = total;
     }
 
+    public Order(String customerEmail, String address) {
+        this.customerEmail = customerEmail;
+        this.address = address;
+    }
+
     public Long getId() {
         return id;
     }

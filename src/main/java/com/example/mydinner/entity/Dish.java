@@ -51,8 +51,7 @@ public class Dish implements Serializable {
     public Dish() {
     }
 
-    public Dish(Long id, String name, String description, Double price, String cuisine, String status) {
-        this.id = id;
+    public Dish(String name, String description, Double price, String cuisine, String status) {
         this.name = name;
         this.description = description;
         this.price = price;

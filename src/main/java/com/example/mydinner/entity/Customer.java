@@ -36,9 +36,6 @@ public class Customer implements Serializable {
     @Size(min=3, max=20)
     private String phone;
 
-//    @OneToMany(mappedBy = "customer")
-//    private List<Order> orders;
-
     public Customer() {
     }
 
@@ -80,12 +77,4 @@ public class Customer implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-//    public List<Order> getOrders() {
-//        return orders;
-//    }
-//
-//    public void setOrders(List<Order> orders) {
-//        this.orders = orders;
-//    }
 }

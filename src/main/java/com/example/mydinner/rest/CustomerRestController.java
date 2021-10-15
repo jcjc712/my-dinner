@@ -40,16 +40,4 @@ public class CustomerRestController {
         customerService.update(customer);
         return customer;
     }
-
-//    @DeleteMapping("/{customerId}")
-//    public ResponseEntity<Map<String, String>> delete(@PathVariable String customerId) {
-//        Customer customer = customerService.findById(customerId);
-//        if(customer == null) {
-//            throw new ResourceRestNotFoundException("Checklist not found with id " + customerId);
-//        }
-//        customerService.deleteById(customerId);
-//        Map<String, String> message = new HashMap<>();
-//        message.put("message", String.format("Customer %s deleted", customerId));
-//        return new ResponseEntity<>(message, HttpStatus.OK);
-//    }
 }

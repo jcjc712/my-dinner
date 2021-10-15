@@ -60,6 +60,11 @@ public class OrderDetail implements Serializable {
         this.subtotal = subtotal;
     }
 
+    public OrderDetail(Integer quantity, Long dishIdentifier) {
+        this.quantity = quantity;
+        this.dishIdentifier = dishIdentifier;
+    }
+
     public Long getId() {
         return id;
     }

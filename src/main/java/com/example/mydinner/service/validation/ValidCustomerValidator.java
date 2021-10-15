@@ -15,7 +15,7 @@ public class ValidCustomerValidator implements ConstraintValidator<ValidCustomer
     @Override
     public boolean isValid(String username, ConstraintValidatorContext context) {
         boolean valid = false;
-        if(customerService.findById(username) != null) {
+        if(this.customerService.findById(username) != null) {
             valid = true;
         }
         return valid;

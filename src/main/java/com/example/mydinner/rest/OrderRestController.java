@@ -32,7 +32,6 @@ public class OrderRestController {
     @GetMapping("/sold-orders")
     public List<Result> soldOrders(@RequestParam String from, @RequestParam String to) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-//        dateFormat.setTimeZone(TimeZone.getTimeZone("America/Mexico_City"));
         List<Result> result = new ArrayList<>();
 
         try {
